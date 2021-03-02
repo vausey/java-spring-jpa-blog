@@ -1,17 +1,23 @@
 package com.pluralsight.blog.model;
 
 import javax.persistence.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Entity
 public class Category {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @OneToMany
+    List<Post> posts;
 
     public Category() {
         super();
+        posts = new ArrayList<>();
+
     }
 
     public Long getId() {
@@ -27,10 +33,12 @@ public class Category {
     }
 
     public List<Post> getPosts() {
-        return null;
+        return posts;
     }
 
     public void addPost(Post post) {
-        return;
+        posts.add(post);
     }
+
+
 }
